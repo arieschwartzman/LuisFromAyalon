@@ -53,7 +53,7 @@ var addEntities = async (config) => {
             console.log(`called addEntity for entity named ${entity}.`);
 
         } catch (err) {
-            console.log(`Error in addEntities:  ${err.message} `);
+            console.error(`Error in addEntities:  ${err.message} `);
             //throw err;
         }
     }, this);
@@ -73,7 +73,7 @@ var callAddEntity = async (options) => {
         return { response: response };
 
     } catch (err) {
-        console.log(`error in callAddEntity: ${err.message}`);
+        console.error(`error in callAddEntity: ${err.message}`);
     }
 }
 

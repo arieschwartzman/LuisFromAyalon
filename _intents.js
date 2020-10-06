@@ -51,7 +51,7 @@ var addIntents = async (config) => {
             console.log(`Called addIntents for intent named ${intent}.`);
 
         } catch (err) {
-            console.log(`Error in addIntents:  ${err.message} `);
+            console.error(`Error in addIntents:  ${err.message} `);
 
         }
     }, this);
@@ -72,7 +72,7 @@ var callAddIntent = async (options) => {
         return { response: response };
 
     } catch (err) {
-        console.log(`Error in callAddIntent:  ${err.message} `);
+        console.error(`Error in callAddIntent:  ${err.message} `);
     }
 }
 

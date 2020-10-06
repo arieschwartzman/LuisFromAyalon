@@ -40,7 +40,7 @@ var createApp = async (config) => {
 
     
         } catch (err) {
-            console.log(`Error creating app:  ${err.message} `);
+            console.error(`Error creating app:  ${err.message} `);
             throw err;
         }
     

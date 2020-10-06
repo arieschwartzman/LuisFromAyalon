@@ -1,9 +1,7 @@
 // node 7.x
 // uses async/await - promises
 
-var rp = require('request-promise');
 var fse = require('fs-extra');
-var path = require('path');
 var request = require('requestretry');
 
 // time delay between requests
@@ -34,7 +32,7 @@ var upload = async (config) => {
 
         // load up promise array
         pages.forEach(page => {
-            config.uri = "https://westus.api.cognitive.microsoft.com/luis/api/v2.0/apps/{appId}/versions/{versionId}/examples".replace("{appId}", config.LUIS_appId).replace("{versionId}", config.LUIS_versionId)
+            config.uri = config.uri.replace("{appId}", config.LUIS_appId).replace("{versionId}", config.LUIS_versionId)
             var pagePromise = sendBatchToApi({
                 url: config.uri,
                 fullResponse: false,
@@ -91,7 +89,7 @@ var getPagesForBatch = (batch, maxItems) => {
             currentPage++;
         }
         return pages;
-    }catch(err){
+    } catch(err){
         throw(err);
     }
 }
@@ -103,7 +101,7 @@ var sendBatchToApi = async (options) => {
         var response = await request(options);
         //return {page: options.body, response:response};
         return {response:response};
-    }catch(err){
+    } catch(err){
         throw err;
     }   
 }   
