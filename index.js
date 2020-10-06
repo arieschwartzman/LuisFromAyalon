@@ -1,5 +1,5 @@
-var path = require('path');
-
+#!/usr/bin/env node
+const path = require('path');
 const chalk = require('chalk');
 const parse = require('./_parse');
 const createApp = require('./_create');

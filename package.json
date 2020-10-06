@@ -1,12 +1,15 @@
 {
-  "name": "create-app-from-csv",
+  "name": "ayalon2luis",
   "version": "1.0.0",
-  "description": "Use Microsoft LUIS Authoring API to build a LUIS app from utterance examples from a CSV format.",
+  "description": "Use Microsoft LUIS Authoring API to build a LUIS app from utterance examples parsed by Ayalon",
   "main": "index.js",
+  "bin": {
+    "ayalon2luis": "./index.js"
+  },
   "scripts": {
     "start": "node index.js"
   },
-  "author": "v-demak",
+  "author": "arie schwartzman",
   "license": "ISC",
   "dependencies": {
     "babyparse": "^0.4.6",
