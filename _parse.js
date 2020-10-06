@@ -2,16 +2,10 @@
 // built with streams for larger files
 
 const fse = require('fs-extra');
-const path = require('path');
 const lineReader = require('line-reader');
-const babyparse = require('babyparse');
 const Promise = require('bluebird');
 const request = require('requestretry');
 
-
-const intent_column = 0;
-const utterance_column = 1;
-var entityNames = [];
 
 var retryStrategy = function (err, response, body) {
     let shouldRetry = err || (response.statusCode === 429);
@@ -41,40 +35,6 @@ function listOfEntities(utterances) {
         return a;
     }, []);
 }
-
-var utterance = function (rowAsString) {
-
-    let json = {
-        "text": "",
-        "intentName": "",
-        "entityLabels": [],
-    };
-
-    if (!rowAsString) return json;
-
-    let dataRow = babyparse.parse(rowAsString);
-    // Get intent name and utterance text 
-    json.intentName = dataRow.data[0][intent_column];
-    json.text = dataRow.data[0][utterance_column];
-    // For each column heading that may be an entity, search for the element in this column in the utterance.
-    entityNames.forEach(function (entityName) {
-        entityToFind = dataRow.data[0][entityName.column];
-        if (entityToFind != "") {
-            strInd = json.text.indexOf(entityToFind);
-            if (strInd > -1) {
-                let entityLabel = {
-                    "entityName": entityName.name,
-                    "startCharIndex": strInd,
-                    "endCharIndex": strInd + entityToFind.length - 1
-                }
-                json.entityLabels.push(entityLabel);
-            }
-        }
-    }, this);
-    return json;
-
-};
-
 
 const convert = async (config, configAyalon) => {
 

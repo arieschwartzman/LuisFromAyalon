@@ -11,7 +11,8 @@
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${workspaceFolder}/index.js"
+            "program": "${workspaceFolder}/index.js",
+            "args": ["--luisApp","sample app", "--luisAuthoringKey", "8fb48d93077c4077a5a994b5e356f92c", "--examplesFile", "training.csv"]
         }
     ]
 }

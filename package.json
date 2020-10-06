@@ -11,6 +11,8 @@
   "dependencies": {
     "babyparse": "^0.4.6",
     "bluebird": "^3.5.1",
+    "command-line-args": "^5.1.1",
+    "command-line-usage": "^6.1.0",
     "fs-extra": "^4.0.2",
     "line-reader": "^0.4.0",
     "request": "^2.83.0",
