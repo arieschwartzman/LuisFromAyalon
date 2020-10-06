@@ -1,8 +1,7 @@
 
-var rp = require('request-promise');
-var fse = require('fs-extra');
-var path = require('path');
 var request = require('requestretry');
+const stringifyObject = require('stringify-object');
+const chalk = require('chalk');
 
 // time delay between requests
 const delayMS = 1000;
@@ -48,16 +47,16 @@ var addIntents = async (config) => {
             });
             intentPromises.push(addIntentPromise);
 
-            console.log(`Called addIntents for intent named ${intent}.`);
+            console.log(`Called addIntents for intent named ${chalk.bold(intent)}.`);
 
         } catch (err) {
-            console.error(`Error in addIntents:  ${err.message} `);
+            console.error(chalk.red(`Error in addIntents:  ${err.message} `));
 
         }
     }, this);
 
     let results = await Promise.all(intentPromises);
-    console.log(`Results of all promises = ${JSON.stringify(results)}`);
+    console.log(`Results of all promises = ${stringifyObject(results, {indent: '   '})}`);
     let response = results;
 
 

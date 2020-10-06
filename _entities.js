@@ -2,9 +2,9 @@
 // uses async/await - promises
 
 const request = require("requestretry");
-var rp = require('request-promise');
-var fse = require('fs-extra');
-var path = require('path');
+const stringifyObject = require('stringify-object');
+const chalk = require('chalk');
+
 
 // time delay between requests
 const delayMS = 1000;
@@ -50,18 +50,15 @@ var addEntities = async (config) => {
             });
             entityPromises.push(addEntityPromise);
 
-            console.log(`called addEntity for entity named ${entity}.`);
+            console.log(`called addEntity for entity named ${chalk.bold(entity)}.`);
 
         } catch (err) {
-            console.error(`Error in addEntities:  ${err.message} `);
-            //throw err;
+            console.error(chalk.red(`Error in addEntities:  ${err.message} `));
         }
     }, this);
     let results = await Promise.all(entityPromises);
-    console.log(`Results of all promises = ${JSON.stringify(results)}`);
+    console.log(`Results of all promises = ${stringifyObject(results, {indent:'   '})}`);
     let response = results;// await fse.writeJson(createResults.json, results);
-
-
 }
 
 // Send JSON as the body of the POST request to the API
@@ -73,7 +70,7 @@ var callAddEntity = async (options) => {
         return { response: response };
 
     } catch (err) {
-        console.error(`error in callAddEntity: ${err.message}`);
+        console.error(chalk.red(`error in callAddEntity: ${err.message}`));
     }
 }
 

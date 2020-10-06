@@ -5,7 +5,8 @@ const fse = require('fs-extra');
 const lineReader = require('line-reader');
 const Promise = require('bluebird');
 const request = require('requestretry');
-
+const chalk = require('chalk');
+const stringifyObject = require('stringify-object');
 
 var retryStrategy = function (err, response, body) {
     let shouldRetry = err || (response.statusCode === 429);
@@ -70,7 +71,6 @@ const convert = async (config, configAyalon) => {
 
             // csv to baby parser object
             var ayalonOptions = {
-                // uri: config.uri,
                 url: configAyalon.uri,
                 fullResponse: false,
                 method: 'POST',
@@ -102,12 +102,18 @@ const convert = async (config, configAyalon) => {
                     utterances.push(utterance);                
                 }
             }
-            console.log("intents: " + JSON.stringify(listOfIntents(utterances)));
-            console.log("entities: " + JSON.stringify(listOfEntities(utterances)));
+            console.log(chalk.bold("intents: ") + stringifyObject(listOfIntents(utterances), {
+                indent: '  '
+            }));
+            console.log(chalk.bold("entities: ") + stringifyObject(listOfEntities(utterances), {
+                indent: '  '
+            }));
+
+            console.log(`Got ${chalk.bold(ayalonResponses.length)} Ayalon responses`);
+
             myOutFile.write(JSON.stringify({ "converted_date": new Date().toLocaleString(), "utterances": utterances }));
             myOutFile.end();
-            console.log("parse done");
-            console.log("JSON file should contain utterances. Next step is to create an app with the intents and entities it found.");
+            console.log(chalk.bold("Parse done"));
 
             var model = 
             {

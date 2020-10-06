@@ -3,6 +3,8 @@
 
 var fse = require('fs-extra');
 var request = require('requestretry');
+const stringifyObject = require('stringify-object');
+const chalk = require('chalk');
 
 // time delay between requests
 const delayMS = 500;
@@ -53,10 +55,10 @@ var upload = async (config) => {
         //execute promise array
         
         let results =  await Promise.all(uploadPromises)
-        console.log(`\n\nResults of all promises = ${JSON.stringify(results)}`);
+        console.log(`\n\nResults of all promises = ${stringifyObject(results, {indent: '   ', inlineCharacterLimit: 40})}`);
         let response = await fse.writeJson(config.inFile.replace('.json','.upload.json'),results);
 
-        console.log("upload done");
+        console.log(chalk.bold("Upload done"));
 
     } catch(err){
         throw err;        

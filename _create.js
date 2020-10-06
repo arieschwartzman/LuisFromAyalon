@@ -2,8 +2,7 @@
 // uses async/await - promises
 
 var rp = require('request-promise');
-var fse = require('fs-extra');
-var path = require('path');
+const chalk = require('chalk');
 
 
 
@@ -35,12 +34,12 @@ var createApp = async (config) => {
 
             // Create app returns an app ID
             let appId = results.response;  
-            console.log(`Called createApp, created app with ID ${appId}`);
+            console.log(`Called createApp, created app with ID ${chalk.bold(appId)}`);
             return appId;
 
     
         } catch (err) {
-            console.error(`Error creating app:  ${err.message} `);
+            console.error(chalk.red(`Error creating app:  ${err.message} `));
             throw err;
         }
     

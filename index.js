@@ -1,5 +1,6 @@
 var path = require('path');
 
+const chalk = require('chalk');
 const parse = require('./_parse');
 const createApp = require('./_create');
 const addEntities = require('./_entities');
@@ -95,21 +96,21 @@ if (options.help) {
     return;
 } else {    
     if (!options.luisApp) {
-        console.log('Missing LUIS application name');
+        console.error(chalk.red('Missing LUIS application name'));
         return;
     }
     if (!options.luisAuthoringKey) {
-        console.log('Missing luisAuthoringKey');
+        console.error(chalk.red('Missing luisAuthoringKey'));
         return;
     }
 
     if (!options.examplesFile || !options.examplesFile.exists) {
         if (!options.examplesFile) {
-            console.log(`Missing examples file`);
+            console.error(chalk.red(`Missing examples file`));
             return;
         }
         if (!options.examplesFile.exists) {
-            console.log(`Can't find ${options.examplesFile.filename}`)
+            console.error(chalk.red(`Can't find ${options.examplesFile.filename} examples file`));
             return;
         }
         
@@ -193,5 +194,5 @@ parse(configParse, configAyalon)
         return upload(configAddUtterances);
 
     }).catch(err => {
-        console.error(err.message);
+        // console.error(chalk.red(err.message));
     });
