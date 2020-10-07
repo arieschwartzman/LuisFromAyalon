@@ -55,9 +55,7 @@ var upload = async (config) => {
         //execute promise array
         
         let results =  await Promise.all(uploadPromises)
-        console.log(`\n\nResults of all promises = ${stringifyObject(results, {indent: '   ', inlineCharacterLimit: 40})}`);
         let response = await fse.writeJson(config.inFile.replace('.json','.upload.json'),results);
-
         console.log(chalk.bold("Upload done"));
 
     } catch(err){

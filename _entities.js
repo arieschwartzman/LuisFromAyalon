@@ -57,7 +57,7 @@ var addEntities = async (config) => {
         }
     }, this);
     let results = await Promise.all(entityPromises);
-    console.log(`Results of all promises = ${stringifyObject(results, {indent:'   '})}`);
+    console.log(`Added entities ${chalk.bold(entityPromises.length)}`);
     let response = results;// await fse.writeJson(createResults.json, results);
 }
 

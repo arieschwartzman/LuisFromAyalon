@@ -67,6 +67,14 @@ const optionDefinitions = [
         typeLabel: '<file path>'
     },
     {
+        name: 'ayalonHostName',
+        alias: 'n',
+        type: String,        
+        description: 'Ayalon service URI used to parse utterances (default: https://ctm-covid19-ayalon-webapp.azurewebsites.net',
+        defaultValue: 'https://ctm-covid19-ayalon-webapp.azurewebsites.net',
+        typeLabel: '<ayalon host name>'
+    },
+    {
         name: 'location',
         alias: 'l',
         type: String,
@@ -96,24 +104,23 @@ if (options.help) {
     return;
 } else {    
     if (!options.luisApp) {
-        console.error(chalk.red('Missing LUIS application name'));
+        console.error(chalk.red('Missing LUIS application name. Use ayalon2luis -h for help'));
         return;
     }
     if (!options.luisAuthoringKey) {
-        console.error(chalk.red('Missing luisAuthoringKey'));
+        console.error(chalk.red('Missing luisAuthoringKey. Use ayalon2luis -h for help '));
         return;
     }
 
     if (!options.examplesFile || !options.examplesFile.exists) {
         if (!options.examplesFile) {
-            console.error(chalk.red(`Missing examples file`));
+            console.error(chalk.red(`Missing examples file. Use ayalon2luis -h for help`));
             return;
         }
         if (!options.examplesFile.exists) {
-            console.error(chalk.red(`Can't find ${options.examplesFile.filename} examples file`));
+            console.error(chalk.red(`Can't find ${options.examplesFile.filename} examples file. Use ayalon2luis -h for help`));
             return;
-        }
-        
+        }        
     }
 }
 
@@ -162,7 +169,7 @@ var configParse = {
 };
 
 var configAyalon = {
-    uri: "https://ctm-covid19-ayalon-webapp.azurewebsites.net/text/analytics/v3.2-preview.1/entities/health"
+    uri: options.ayalonHostName + '/text/analytics/v3.2-preview.1/entities/health'
 }
 
 
