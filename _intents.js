@@ -56,7 +56,7 @@ var addIntents = async (config) => {
     }, this);
 
     let results = await Promise.all(intentPromises);
-    console.log(`Results of all promises = ${stringifyObject(results, {indent: '   '})}`);
+    console.log(`Intents added ${chalk.bold(results.length)}`);
     let response = results;
 
 

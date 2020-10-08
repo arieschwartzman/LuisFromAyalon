@@ -1,6 +1,6 @@
 {
   "name": "ayalon2luis",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "Use Microsoft LUIS Authoring API to build a LUIS app from utterance examples parsed by Ayalon",
   "main": "index.js",
   "bin": {
@@ -12,7 +12,6 @@
   "author": "arie schwartzman",
   "license": "ISC",
   "dependencies": {
-    "babyparse": "^0.4.6",
     "bluebird": "^3.5.1",
     "chalk": "^4.1.0",
     "command-line-args": "^5.1.1",

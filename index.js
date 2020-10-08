@@ -89,7 +89,7 @@ const options = commandLineArgs(optionDefinitions);
 if (options.help) {
     const usage = commandLineUsage([
         {
-            header: 'Typical Example',
+            header: 'Example',
             content: 'ayalon2luis -a "sample app" -k 3231231232 -f ./examples.csv'
         },
         {
@@ -97,7 +97,7 @@ if (options.help) {
             optionList: optionDefinitions
         },
         {
-            content: 'Project home: {underline https://github.com/arieschwartzman/LuisFromAyalon}'
+            content: `Project home: {underline https://github.com/arieschwartzman/LuisFromAyalon}`
         }
     ])
     console.log(usage);
@@ -130,7 +130,7 @@ var configAddUtterances = {
     LUIS_subscriptionKey: options.luisAuthoringKey,
     LUIS_appId: LUIS_appId,
     LUIS_versionId: LUIS_versionId,
-    inFile: path.join(__dirname, uploadFile),
+    inFile: path.join('./', uploadFile),
     batchSize: 100,
     uri: `https://${options.location}.api.cognitive.microsoft.com/luis/api/v2.0/apps/{appId}/versions/{versionId}/examples`
 };
@@ -164,8 +164,8 @@ var configAddEntities = {
 
 /* input and output files for parsing CSV */
 var configParse = {
-    inFile: path.join(__dirname, options.examplesFile.filename),
-    outFile: path.join(__dirname, uploadFile)
+    inFile: path.join('./', options.examplesFile.filename),
+    outFile: path.join('./', uploadFile)
 };
 
 var configAyalon = {
