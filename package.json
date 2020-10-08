@@ -1,6 +1,6 @@
 {
   "name": "ayalon2luis",
-  "version": "1.0.2",
+  "version": "1.0.4",
   "description": "Use Microsoft LUIS Authoring API to build a LUIS app from utterance examples parsed by Ayalon",
   "main": "index.js",
   "bin": {

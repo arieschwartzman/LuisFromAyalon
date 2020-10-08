@@ -96,7 +96,7 @@ if (options.help) {
     const usage = commandLineUsage([
         {
             header: 'Example',
-            content: 'ayalon2luis -a "sample app" -k 3231231232 -f ./examples.csv'
+            content: 'ayalon2luis -a "sample app" -k <authoring key> --ayalonKey <ayalon key> -f ./examples.csv'
         },
         {
             header: 'Options',
