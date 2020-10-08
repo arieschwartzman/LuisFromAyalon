@@ -70,9 +70,15 @@ const optionDefinitions = [
         name: 'ayalonHostName',
         alias: 'n',
         type: String,        
-        description: 'Ayalon service URI used to parse utterances (default: https://ctm-covid19-ayalon-webapp.azurewebsites.net',
-        defaultValue: 'https://ctm-covid19-ayalon-webapp.azurewebsites.net',
+        description: 'Ayalon service URI used to parse utterances (default: https://ctm-covid19-gateway-webapp.azurewebsites.net/ta4h/',
+        defaultValue: 'https://ctm-covid19-gateway-webapp.azurewebsites.net/ta4h/',
         typeLabel: '<ayalon host name>'
+    },
+    {
+        name: 'ayalonKey',
+        type: String,
+        description: 'Ayalon service API key',
+        typeLabel: '<ayalon api key>'        
     },
     {
         name: 'location',
@@ -111,7 +117,10 @@ if (options.help) {
         console.error(chalk.red('Missing luisAuthoringKey. Use ayalon2luis -h for help '));
         return;
     }
-
+    if (!options.ayalonKey) {
+        console.error(chalk.red('Missing ayalonKey. Use ayalon2luis -h for help '));
+        return;
+    }
     if (!options.examplesFile || !options.examplesFile.exists) {
         if (!options.examplesFile) {
             console.error(chalk.red(`Missing examples file. Use ayalon2luis -h for help`));
@@ -169,7 +178,8 @@ var configParse = {
 };
 
 var configAyalon = {
-    uri: options.ayalonHostName + '/text/analytics/v3.2-preview.1/entities/health'
+    uri: options.ayalonHostName + '/text/analytics/v3.2-preview.1/entities/health',
+    key: options.ayalonKey
 }
 
 

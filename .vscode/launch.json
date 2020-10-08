@@ -12,7 +12,7 @@
                 "<node_internals>/**"
             ],
             "program": "${workspaceFolder}/index.js",
-            "args": ["--luisApp","sample app", "--luisAuthoringKey", "8fb48d93077c4077a5a994b5e356f92c", "--examplesFile", "training.csv"]
+            "args": ["--luisApp","sample app", "--luisAuthoringKey", "8fb48d93077c4077a5a994b5e356f92c", "--ayalonKey", "uh7bjkhidsfxc", "--examplesFile", "training.csv"]
         }
     ]
 }

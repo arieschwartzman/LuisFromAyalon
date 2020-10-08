@@ -7,6 +7,7 @@ const Promise = require('bluebird');
 const request = require('requestretry');
 const chalk = require('chalk');
 const stringifyObject = require('stringify-object');
+var rp = require('request-promise');
 
 var retryStrategy = function (err, response, body) {
     let shouldRetry = err || (response.statusCode === 429);
@@ -72,15 +73,15 @@ const convert = async (config, configAyalon) => {
             // csv to baby parser object
             var ayalonOptions = {
                 url: configAyalon.uri,
+                headers: {
+                    'x-ctm-api-key': configAyalon.key
+                },
                 fullResponse: false,
                 method: 'POST',
                 json: true,
-                body: jsonBody,
-                maxAttempts: 5,
-                retryDelay: 1000,
-                retryStrategy: retryStrategy
+                body: jsonBody
             };
-            ayalonPromises.push(request(ayalonOptions));
+            ayalonPromises.push(rp(ayalonOptions));
 
         }).then(async () => {
             var ayalonResponses = await Promise.all(ayalonPromises);
@@ -122,7 +123,9 @@ const convert = async (config, configAyalon) => {
             }
             return model;
 
-        });
+        }).catch(function(err) {
+            console.error(chalk.red(err.message));
+        }); 
 
     } catch (err) {
         throw err;
